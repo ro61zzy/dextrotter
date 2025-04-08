@@ -1,32 +1,17 @@
-// layout.tsx
-'use client';
+import WalletProvider from '@/contexts/WalletProvider';
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from '@/theme/theme'; // if you have a custom MUI theme
 
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { ReactNode } from 'react';
-
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#ff9800', // Orange accent
-    },
-    background: {
-      default: '#121212',
-      paper: '#1e1e1e',
-    },
-  },
-  shape: {
-    borderRadius: 12,
-  },
-});
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          {children}
+          <WalletProvider>
+            {children}
+          </WalletProvider>
         </ThemeProvider>
       </body>
     </html>
