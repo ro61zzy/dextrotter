@@ -20,7 +20,6 @@ import Grid from "@mui/material/Grid";
 import { useAccount } from "wagmi"; // For wallet connection
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
-import FallingCoins from "@/components/FallingCoins"; // adjust path if needed
 
 //import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
 
@@ -54,25 +53,30 @@ export default function Page() {
   };
 
   return (
-    <Container
+    <Box
       sx={{
         minHeight: "100vh",
         padding: 4,
-        backgroundColor: "background.default",
-        position: "relative",
+       // background: "linear-gradient(to right, #1c1c1c, #2a2a2a)", // Dark gradient
+        color: "white",
       }}
     >
-      <FallingCoins />
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: 2,
+          padding: 1,
         }}
       >
         <Typography
-          sx={{ color: "#ec4612", fontWeight: "700", fontSize: "2rem" }}
+          sx={{
+            fontWeight: "700",
+            fontSize: "2rem",
+            background: "linear-gradient(45deg, #ec4612, #ff6f00)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
         >
           DexTrotter
         </Typography>
@@ -85,7 +89,7 @@ export default function Page() {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          pt: "1.5rem",
+          pt: "0.5rem",
         }}
       >
         <Typography
@@ -123,10 +127,12 @@ export default function Page() {
           sx={{
             width: "80%",
             maxWidth: 500,
-            backgroundColor: "#f5f5f5",
+            backdropFilter: "blur(10px)",
+            background: "rgba(255, 255, 255, 0.05)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
             borderRadius: 2,
             padding: 3,
-            // boxShadow: 3,
+            boxShadow: 3,
           }}
         >
           <Typography
@@ -216,7 +222,15 @@ export default function Page() {
       <TableContainer component={Paper} sx={{ color: "white" }}>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow
+              sx={{
+                transition: "all 0.3s ease",
+                "&:hover": {
+                  backgroundColor: "#333",
+                  cursor: "pointer",
+                },
+              }}
+            >
               <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
                 Aggregator
               </TableCell>
@@ -241,7 +255,13 @@ export default function Page() {
             {["1inch", "CowSwap", "Matcha"].map((dex, index) => (
               <TableRow
                 key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "#333",
+                    cursor: "pointer",
+                  },
+                }}
               >
                 <TableCell
                   sx={{ display: "flex", alignItems: "center", color: "grey" }}
@@ -263,6 +283,6 @@ export default function Page() {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+    </Box>
   );
 }

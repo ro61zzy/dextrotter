@@ -58,12 +58,15 @@ export default function FallingCoins() {
           }}
           style={{
             position: 'absolute',
-            left: coin.left,
-            width: coin.size,
-            height: coin.size,
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            pointerEvents: 'none',
             zIndex: -1,
-            opacity: 0.8,
           }}
+          
         />
       ))}
     </div>
