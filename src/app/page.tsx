@@ -6,15 +6,16 @@ import {
   Button,
   Container,
   Typography,
-  Card,
-  CardContent,
   TextField,
-  Select,
-  MenuItem,
+  Table, TableBody, TableCell, TableContainer,
+  TableHead, TableRow, Paper,
+  Avatar
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useAccount } from "wagmi"; // For wallet connection
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+
 //import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
 
 export default function Page() {
@@ -54,7 +55,6 @@ export default function Page() {
         backgroundColor: "background.default",
       }}
     >
-      {/* Header Section */}
       <Box
         sx={{
           display: "flex",
@@ -77,7 +77,7 @@ export default function Page() {
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          pt:"1.5rem"
+          pt: "1.5rem",
         }}
       >
         <Typography
@@ -95,6 +95,146 @@ export default function Page() {
           get MEV protection.
         </Typography>
       </Box>
+      <Box
+        sx={{
+          minHeight: "50vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          pt:"10px",
+          pb:"2rem"
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: 500,
+            backgroundColor: "#f5f5f5",
+            borderRadius: 2,
+            padding: 3,
+            boxShadow: 3,
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              color: "#ec4612",
+              textAlign: "center",
+              marginBottom: 2,
+              fontWeight: 700,
+            }}
+          >
+            Token Swap
+          </Typography>
+
+          <Box display="flex" flexDirection="column" gap={3}>
+            {/* From Token Input */}
+            <TextField
+              label="From Token"
+              value={fromToken}
+              onChange={(e) => setFromToken(e.target.value)}
+              variant="outlined"
+              fullWidth
+              sx={{
+                backgroundColor: "#f5f5f5",
+                // color:"#ec4612",
+                borderRadius: 1,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "10px",
+                },
+              }}
+            />
+
+            {/* To Token Input */}
+            <TextField
+              label="To Token"
+              value={toToken}
+              onChange={(e) => setToToken(e.target.value)}
+              variant="outlined"
+              fullWidth
+              sx={{
+                backgroundColor: "#f5f5f5",
+                borderRadius: 1,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "10px",
+                },
+              }}
+            />
+
+            {/* Amount Input */}
+            <TextField
+              label="Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              variant="outlined"
+              fullWidth
+              sx={{
+                backgroundColor: "#f5f5f5",
+                borderRadius: 1,
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "10px",
+                },
+              }}
+            />
+
+            {/* Swap Button */}
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{
+                backgroundColor: "#ec4612",
+                padding: "12px",
+                borderRadius: 1.5,
+                fontWeight: "bold",
+                "&:hover": {
+                  backgroundColor: "#d93c10",
+                },
+              }}
+              startIcon={<CompareArrowsIcon />}
+              onClick={() => console.log("Run comparison")}
+            >
+              Swap
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+
+      <TableContainer component={Paper} sx={{  color: 'white' }}>
+  <Table>
+    <TableHead>
+      <TableRow>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Aggregator</TableCell>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Estimated Output</TableCell>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Slippage</TableCell>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Gas Fees</TableCell>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Execution Time</TableCell>
+        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>MEV Protection</TableCell>
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {['1inch', 'CowSwap', 'Matcha'].map((dex, index) => (
+        <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+          <TableCell sx={{ display: 'flex', alignItems: 'center', color: 'grey' }}>
+            <Avatar
+              sx={{ bgcolor: '#ec4612', mr: 2 }}
+              alt={dex}
+              src={`/logos/${dex.toLowerCase()}.png`}
+            />
+            {dex}
+          </TableCell>
+          <TableCell sx={{ color: 'grey' }}>-</TableCell>
+          <TableCell sx={{ color: 'grey' }}>-</TableCell>
+          <TableCell sx={{ color: 'grey' }}>-</TableCell>
+          <TableCell sx={{ color: 'grey' }}>-</TableCell>
+          <TableCell sx={{ color: 'grey' }}>-</TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+
+    
     </Container>
   );
 }

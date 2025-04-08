@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -31,4 +31,4 @@ button[data-rkconnectbutton="true"] {
   color: white !important;
   padding: 10px 20px !important;
   border-radius: 5px !important;
-}
+} */
