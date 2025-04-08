@@ -1,17 +1,16 @@
 // app/layout.tsx
 import './globals.css';
-import ThemeWalletProvider from '@/components/ThemeWalletProvider';
+import '@rainbow-me/rainbowkit/styles.css';
+import WalletProvider from '@/contexts/WalletProvider';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ThemeWalletProvider>{children}</ThemeWalletProvider>
+        <WalletProvider >{children}</WalletProvider>
       </body>
     </html>
   );
 }
+
+export default RootLayout;
