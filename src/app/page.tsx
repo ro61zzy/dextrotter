@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Button, Container, Grid, Typography, Card, CardContent, TextField } from '@mui/material';
+import { Box, Button, Container, Typography, Card, CardContent, TextField, Grid } from '@mui/material';
 import { useAccount } from 'wagmi'; // For wallet connection
-import { ConnectButton } from '@rainbow-me/rainbowkit'; // RainbowKit for wallet connection
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 //import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
 
 export default function Page() {
@@ -45,7 +45,7 @@ export default function Page() {
 
       {/* Main Dashboard Content */}
       <Grid container spacing={4} sx={{ marginTop: 4 }}>
-        {/* Token Swap Overview */}
+        {/* Token Swap Overview 
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent>
@@ -59,7 +59,7 @@ export default function Page() {
           </Card>
         </Grid>
 
-        {/* Price Chart */}
+        {/* Price Chart
         <Grid item xs={12} md={8}>
           <Card>
             <CardContent>
@@ -67,12 +67,12 @@ export default function Page() {
                 Price Trend (Last 5 Transactions)
               </Typography>
               <hr />
-              {/* <Line data={chartData} /> */}
+              {/* <Line data={chartData} /> 
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Swap Form */}
+        {/* Swap Form
         <Grid item xs={12} md={6}>
           <Card>
             <CardContent>
@@ -105,7 +105,7 @@ export default function Page() {
               </Button>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid>*/}
       </Grid>
 
       {/* Footer Section */}
