@@ -20,13 +20,23 @@ import Grid from "@mui/material/Grid";
 import { useAccount } from "wagmi"; // For wallet connection
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import TokenSelector from "@/components/TokenSelector";
+
+interface Token {
+  name: string;
+  symbol: string;
+  address: string;
+  decimals: number;
+  logoURI: string;
+}
 
 //import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
 
 export default function Page() {
   const { isConnected, address } = useAccount(); // Check if the user is connected
-  const [fromToken, setFromToken] = useState("");
-  const [toToken, setToToken] = useState("");
+  const [fromToken, setFromToken] = useState<Token | null>(null);
+  const [toToken, setToToken] = useState<Token | null>(null);
+
   const [amount, setAmount] = useState("");
   const [swapRate, setSwapRate] = useState<number | null>(null);
 
@@ -57,7 +67,7 @@ export default function Page() {
       sx={{
         minHeight: "100vh",
         padding: 4,
-       // background: "linear-gradient(to right, #1c1c1c, #2a2a2a)", // Dark gradient
+        // background: "linear-gradient(to right, #1c1c1c, #2a2a2a)", // Dark gradient
         color: "white",
       }}
     >
@@ -148,37 +158,15 @@ export default function Page() {
           </Typography>
 
           <Box display="flex" flexDirection="column" gap={3}>
-            {/* From Token Input */}
-            <TextField
+            <TokenSelector
               label="From Token"
               value={fromToken}
-              onChange={(e) => setFromToken(e.target.value)}
-              variant="outlined"
-              fullWidth
-              sx={{
-                backgroundColor: "#f5f5f5",
-                // color:"#ec4612",
-                borderRadius: 1,
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                },
-              }}
+              onChange={setFromToken}
             />
-
-            {/* To Token Input */}
-            <TextField
+            <TokenSelector
               label="To Token"
               value={toToken}
-              onChange={(e) => setToToken(e.target.value)}
-              variant="outlined"
-              fullWidth
-              sx={{
-                backgroundColor: "#f5f5f5",
-                borderRadius: 1,
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                },
-              }}
+              onChange={setToToken}
             />
 
             {/* Amount Input */}
