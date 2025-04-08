@@ -7,14 +7,20 @@ import {
   Container,
   Typography,
   TextField,
-  Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper,
-  Avatar
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Avatar,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useAccount } from "wagmi"; // For wallet connection
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import FallingCoins from "@/components/FallingCoins"; // adjust path if needed
 
 //import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
 
@@ -53,8 +59,10 @@ export default function Page() {
         minHeight: "100vh",
         padding: 4,
         backgroundColor: "background.default",
+        position: "relative",
       }}
     >
+      <FallingCoins />
       <Box
         sx={{
           display: "flex",
@@ -101,19 +109,24 @@ export default function Page() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#fff",
-          pt:"10px",
-          pb:"2rem"
+          // backgroundColor: "#fff",
+          // backgroundColor: "#f5f5f5",
+          borderRadius: 2,
+          // width: "100%",
+          // padding: 3,
+          // boxShadow: 3,
+          pt: "10px",
+          pb: "3rem",
         }}
       >
         <Box
           sx={{
-            width: "100%",
+            width: "80%",
             maxWidth: 500,
             backgroundColor: "#f5f5f5",
             borderRadius: 2,
             padding: 3,
-            boxShadow: 3,
+            // boxShadow: 3,
           }}
         >
           <Typography
@@ -200,41 +213,56 @@ export default function Page() {
         </Box>
       </Box>
 
-      <TableContainer component={Paper} sx={{  color: 'white' }}>
-  <Table>
-    <TableHead>
-      <TableRow>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Aggregator</TableCell>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Estimated Output</TableCell>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Slippage</TableCell>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Gas Fees</TableCell>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>Execution Time</TableCell>
-        <TableCell sx={{ color: '#ec4612', fontWeight: 'bold' }}>MEV Protection</TableCell>
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {['1inch', 'CowSwap', 'Matcha'].map((dex, index) => (
-        <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-          <TableCell sx={{ display: 'flex', alignItems: 'center', color: 'grey' }}>
-            <Avatar
-              sx={{ bgcolor: '#ec4612', mr: 2 }}
-              alt={dex}
-              src={`/logos/${dex.toLowerCase()}.png`}
-            />
-            {dex}
-          </TableCell>
-          <TableCell sx={{ color: 'grey' }}>-</TableCell>
-          <TableCell sx={{ color: 'grey' }}>-</TableCell>
-          <TableCell sx={{ color: 'grey' }}>-</TableCell>
-          <TableCell sx={{ color: 'grey' }}>-</TableCell>
-          <TableCell sx={{ color: 'grey' }}>-</TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-  </Table>
-</TableContainer>
-
-    
+      <TableContainer component={Paper} sx={{ color: "white" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                Aggregator
+              </TableCell>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                Estimated Output
+              </TableCell>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                Slippage
+              </TableCell>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                Gas Fees
+              </TableCell>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                Execution Time
+              </TableCell>
+              <TableCell sx={{ color: "#ec4612", fontWeight: "bold" }}>
+                MEV Protection
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {["1inch", "CowSwap", "Matcha"].map((dex, index) => (
+              <TableRow
+                key={index}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell
+                  sx={{ display: "flex", alignItems: "center", color: "grey" }}
+                >
+                  <Avatar
+                    sx={{ bgcolor: "#ec4612", mr: 2 }}
+                    alt={dex}
+                    src={`/logos/${dex.toLowerCase()}.png`}
+                  />
+                  {dex}
+                </TableCell>
+                <TableCell sx={{ color: "grey" }}>-</TableCell>
+                <TableCell sx={{ color: "grey" }}>-</TableCell>
+                <TableCell sx={{ color: "grey" }}>-</TableCell>
+                <TableCell sx={{ color: "grey" }}>-</TableCell>
+                <TableCell sx={{ color: "grey" }}>-</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Container>
   );
 }
