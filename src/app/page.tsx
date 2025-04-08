@@ -9,6 +9,8 @@ import {
   Card,
   CardContent,
   TextField,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useAccount } from "wagmi"; // For wallet connection
@@ -61,26 +63,36 @@ export default function Page() {
           padding: 2,
         }}
       >
-        <Typography variant="h4" color="primary" fontWeight={700}>
+        <Typography
+          sx={{ color: "#ec4612", fontWeight: "700", fontSize: "2rem" }}
+        >
           DexTrotter
         </Typography>
 
         <ConnectButton />
       </Box>
-
-      <Typography variant="h3" fontWeight={700} gutterBottom color="#ec4612">
-  Best Swap, Every Time.
-</Typography>
-<Typography variant="subtitle1" color="textSecondary" gutterBottom>
-  Compare prices across CowSwap, Matcha, 1inch and more. Save on gas, get MEV protection.
-</Typography>
-
-
-
-      {/* Footer Section */}
-      <Box sx={{ marginTop: 4, textAlign: "center" }}>
-        <Typography variant="body2">
-          © 2024 DexTrotter - All Rights Reserved
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          pt:"1.5rem"
+        }}
+      >
+        <Typography
+          sx={{
+            fontSize: "1.5rem",
+            fontWeight: "700",
+            pb: "10px",
+            color: "#ec4612",
+          }}
+        >
+          Best Swap, Every Time.
+        </Typography>
+        <Typography sx={{ fontSize: "1rem", color: "grey", pb: "1rem" }}>
+          Compare prices across CowSwap, Matcha, 1inch and more. Save on gas,
+          get MEV protection.
         </Typography>
       </Box>
     </Container>

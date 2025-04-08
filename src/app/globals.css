@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+button[data-rkconnectbutton="true"] {
+  background-color: #ec4612 !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  border-radius: 5px !important;
+}
