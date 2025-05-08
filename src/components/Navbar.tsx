@@ -51,7 +51,7 @@ const Navbar = () => {
               <NavButton label="Swap" icon={<SwapHorizIcon />} path="/"  />
               <NavButton label="Lending" icon={<AccountBalanceIcon />} path="/lending"  />
               <NavButton label="Liquidity" icon={<WaterDropIcon />} path="/liquidity" />
-              <NavButton label="Flash Loans" icon={<FlashOnIcon />} path="/flash-loans"  />
+              <NavButton label="Flash Loans" icon={<FlashOnIcon />} path="/flash_loans"  />
             </Box>
           </Box>
           <Box
