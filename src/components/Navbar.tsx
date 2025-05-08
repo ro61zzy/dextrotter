@@ -48,87 +48,10 @@ const Navbar = () => {
               DexTrotter
             </Typography>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-            <NavButton label="Swap" icon={<SwapHorizIcon />} />
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ margin: "0 1rem" }}
-              >
-                <Button
-                  startIcon={<AccountBalanceIcon />}
-                  sx={{
-                    color: "#ec4612",
-                    backgroundColor: "white",
-                    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "8px",
-                    fontSize: "12px",
-                    width: "140px",
-                    height: "40px",
-                    justifyContent: "center",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
-                      backgroundColor: "#fff7f4",
-                    },
-                  }}
-                >
-                  Lending
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ margin: "0 1rem" }}
-              >
-                <Button
-                  startIcon={<WaterDropIcon />}
-                  sx={{
-                    color: "#ec4612",
-                    backgroundColor: "white",
-                    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "8px",
-                    fontSize:"12px",
-                    width: "140px",
-                    height: "40px",
-                    justifyContent: "center",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
-                      backgroundColor: "#fff7f4",
-                    },
-                  }}
-                >
-                  Liquidity
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                style={{ margin: "0 1rem" }}
-              >
-                <Button
-                  startIcon={<FlashOnIcon />}
-                  sx={{
-                    color: "#ec4612",
-                    backgroundColor: "white",
-                    boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
-                    borderRadius: "8px",
-                    fontSize:"12px",
-                    width: "140px",
-                    height: "40px",
-                    justifyContent: "center",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.3)",
-                      backgroundColor: "#fff7f4",
-                    },
-                  }}
-                >
-                  Flash Loans
-                </Button>
-              </motion.div>
-
-              {/* <ConnectButton /> */}
+              <NavButton label="Swap" icon={<SwapHorizIcon />} path="/"  />
+              <NavButton label="Lending" icon={<AccountBalanceIcon />} path="/lending"  />
+              <NavButton label="Liquidity" icon={<WaterDropIcon />} path="/liquidity" />
+              <NavButton label="Flash Loans" icon={<FlashOnIcon />} path="/flash-loans"  />
             </Box>
           </Box>
           <Box

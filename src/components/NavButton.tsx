@@ -1,21 +1,30 @@
 // components/NavButton.tsx
+'use client'
+
 import { Button } from "@mui/material";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface NavButtonProps {
   label: string;
   icon: React.ReactNode;
+  path: string;
+
 }
 
-const NavButton: React.FC<NavButtonProps> = ({ label, icon }) => {
+const NavButton: React.FC<NavButtonProps> = ({ label, icon, path }) => {
+    const router = useRouter();
+
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       style={{ margin: "0 1rem" }}
     >
+        
       <Button
+     onClick={() => router.push(path)}
         startIcon={icon}
         sx={{
             color: "#ec4612",
@@ -36,6 +45,7 @@ const NavButton: React.FC<NavButtonProps> = ({ label, icon }) => {
       >
         {label}
       </Button>
+   
     </motion.div>
   );
 };
