@@ -17,10 +17,11 @@ import {
   Avatar,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { useAccount } from "wagmi"; 
+import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import TokenSelector from "@/components/TokenSelector";
+import Navbar from "@/components/Navbar";
 
 interface Token {
   name: string;
@@ -30,8 +31,6 @@ interface Token {
   logoURI: string;
 }
 
-
-
 export default function Page() {
   const { isConnected, address } = useAccount();
   const [fromToken, setFromToken] = useState<Token | null>(null);
@@ -39,7 +38,6 @@ export default function Page() {
   const [amount, setAmount] = useState("");
 
   const [swapRate, setSwapRate] = useState<number | null>(null);
-
 
   const chartData = {
     labels: ["1", "2", "3", "4", "5"],
@@ -55,10 +53,9 @@ export default function Page() {
   };
 
   const handleSwap = () => {
-   
     console.log(`Swapping ${amount} ${fromToken} to ${toToken}`);
-   
-    setSwapRate(Math.random() * 10); 
+
+    setSwapRate(Math.random() * 10);
   };
 
   return (
@@ -73,32 +70,10 @@ export default function Page() {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: 1,
-        }}
-      >
-        <Typography
-          sx={{
-            fontWeight: "700",
-            fontSize: "2rem",
-            background: "linear-gradient(45deg, #ec4612, #ff6f00)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          DexTrotter
-        </Typography>
-
-        <ConnectButton />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "column",
-          pt: "0.5rem",
+          pt: "5rem",
         }}
       >
         <Typography
@@ -156,30 +131,32 @@ export default function Page() {
             Token Swap
           </Typography>
 
-          <Box display="flex" flexDirection="column" gap={3}>
-          <TokenSelector
-          label="From Token"
-          value={fromToken}
-          onChange={setFromToken}
-        />
-        <TokenSelector
-          label="To Token"
-          value={toToken}
-          onChange={setToToken}
-        />
-        <TextField
-          label="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          variant="outlined"
-        />
-        <Button
-          variant="contained"
-          onClick={() => console.log(`Swapping ${amount} ${fromToken} to ${toToken}`)}
-        >
-          Swap
-        </Button>
-          </Box>
+          {/* <Box display="flex" flexDirection="column" gap={3}>
+            <TokenSelector
+              label="From Token"
+              value={fromToken}
+              onChange={setFromToken}
+            />
+            <TokenSelector
+              label="To Token"
+              value={toToken}
+              onChange={setToToken}
+            />
+            <TextField
+              label="Amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              variant="outlined"
+            />
+            <Button
+              variant="contained"
+              onClick={() =>
+                console.log(`Swapping ${amount} ${fromToken} to ${toToken}`)
+              }
+            >
+              Swap
+            </Button>
+          </Box> */}
         </Box>
       </Box>
 
@@ -230,11 +207,11 @@ export default function Page() {
                 <TableCell
                   sx={{ display: "flex", alignItems: "center", color: "grey" }}
                 >
-                  <Avatar
+                  {/* <Avatar
                     sx={{ bgcolor: "#ec4612", mr: 2 }}
                     alt={dex}
                     src={`/logos/${dex.toLowerCase()}.png`}
-                  />
+                  /> */}
                   {dex}
                 </TableCell>
                 <TableCell sx={{ color: "grey" }}>-</TableCell>
