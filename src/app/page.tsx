@@ -17,7 +17,7 @@ import {
   Avatar,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { useAccount } from "wagmi"; // For wallet connection
+import { useAccount } from "wagmi"; 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import TokenSelector from "@/components/TokenSelector";
@@ -30,17 +30,17 @@ interface Token {
   logoURI: string;
 }
 
-//import { Line } from 'react-chartjs-2'; // For price chart (you can replace it with your data visualization)
+
 
 export default function Page() {
-  const { isConnected, address } = useAccount(); // Check if the user is connected
+  const { isConnected, address } = useAccount();
   const [fromToken, setFromToken] = useState<Token | null>(null);
   const [toToken, setToToken] = useState<Token | null>(null);
   const [amount, setAmount] = useState("");
 
   const [swapRate, setSwapRate] = useState<number | null>(null);
 
-  // Placeholder data for price chart
+
   const chartData = {
     labels: ["1", "2", "3", "4", "5"],
     datasets: [
@@ -54,12 +54,11 @@ export default function Page() {
     ],
   };
 
-  // Handle the swap action (this will connect to the backend API later)
   const handleSwap = () => {
-    // Placeholder logic for the swap action
+   
     console.log(`Swapping ${amount} ${fromToken} to ${toToken}`);
-    // Replace this with actual logic for fetching the swap rate from DEXs
-    setSwapRate(Math.random() * 10); // Random swap rate for now
+   
+    setSwapRate(Math.random() * 10); 
   };
 
   return (

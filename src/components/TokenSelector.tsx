@@ -30,7 +30,7 @@ const TokenSelector = ({
       setError(null);
 
       try {
-        const response = await axios.get("/api/tokens"); // Calls your Next.js API route
+        const response = await axios.get("/api/tokens"); 
         const tokenMap = response.data;
 
         const tokenList = Object.values(tokenMap) as Token[];

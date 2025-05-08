@@ -13,12 +13,12 @@ export async function GET() {
 
     const data = await res.json();
 
-    // Map CoinGecko data to your Token interface
+  
     const tokens = data.map((coin: any) => ({
       name: coin.name,
       symbol: coin.symbol.toUpperCase(),
-      address: coin.id, // CoinGecko uses 'id' as unique identifier
-      decimals: 18, // You can hardcode or skip this for now
+      address: coin.id,
+      decimals: 18, 
       logoURI: coin.image,
     }));
 
