@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🧠 Overview
+DexTrotter is a modern decentralized finance (DeFi) platform designed to help users compare various DeFi actions such as token swaps, lending/borrowing, liquidity provisioning, and flash loans.
 
-## Getting Started
+The platform aggregates real-time data from multiple protocols and DEXs to provide insights into the best available rates, fees, and yield opportunities. Our goal is to empower users with transparent, actionable data to make informed DeFi decisions.
 
-First, run the development server:
+🚀 Project Objectives
+🌀 Iteration 1 – Informational Platform
+The first iteration focuses on building a comparison tool that informs users about the best platforms for DeFi interactions.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Swap Comparison: Display best token swap rates across major DEXs (e.g. Uniswap, 1inch).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Lending Comparison: Compare lending/borrowing rates from platforms like Aave and Compound.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Liquidity Comparison: Highlight top liquidity pools and staking rewards.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Flash Loan Insights: Surface flash loan opportunities across protocols.
 
-## Learn More
+🔮 Iteration 2 – Interactive & Transactional Platform (Future)
+The second iteration will enable users to interact directly with protocols through wallet integrations.
 
-To learn more about Next.js, take a look at the following resources:
+Perform swaps, lend/borrow, and stake directly from DexTrotter.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Add advanced trading tools like slippage control and fee optimization.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Visualize complex DeFi data using 3D graphics (Three.js).
 
-## Deploy on Vercel
+🛠️ Technologies Used
+Frontend
+React.js
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Next.js
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Material-UI (MUI)
+
+Framer Motion
+
+Three.js (planned for Iteration 2)
+
+Blockchain & Wallets
+Ethereum
+
+ethers.js
+
+Web3.js
+
+MetaMask
+
+WalletConnect
+
+Data Providers / APIs
+1inch
+
+Uniswap
+
+Aave
+
+Compound
+
+💡 Key Features
+🔍 Real-time Comparisons – Token swap, lending, liquidity rewards, and flash loan insights.
+
+✨ Top-tier UI/UX – Stunning animations and transitions using Framer Motion.
+
+📱 Wallet Integration – Seamless MetaMask and WalletConnect support.
+
+🔧 Modular Architecture – Individual pages for each DeFi action (Swap, Lend, Stake, Flash Loans).
+
+🗺️ Roadmap
+🌀 Iteration 1 (Current)
+ Responsive animated navbar (Framer Motion)
+
+ Wallet connection (ConnectButton)
+
+ Swapping comparison interface
+
+ Lending/borrowing dashboard
+
+ Liquidity pool explorer
+
+ Flash loan information and guide
+
+🔮 Iteration 2 (Planned)
+ Direct interaction with protocols via connected wallets
+
+ Advanced DeFi features (slippage, fee optimization)
+
+ Real-time alerts and transaction feedback
+
+ 3D DeFi visualizations using Three.js
+
