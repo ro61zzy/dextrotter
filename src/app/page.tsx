@@ -36,8 +36,8 @@ export default function Page() {
   const { isConnected, address } = useAccount(); // Check if the user is connected
   const [fromToken, setFromToken] = useState<Token | null>(null);
   const [toToken, setToToken] = useState<Token | null>(null);
-
   const [amount, setAmount] = useState("");
+
   const [swapRate, setSwapRate] = useState<number | null>(null);
 
   // Placeholder data for price chart
@@ -158,51 +158,28 @@ export default function Page() {
           </Typography>
 
           <Box display="flex" flexDirection="column" gap={3}>
-            <TokenSelector
-              label="From Token"
-              value={fromToken}
-              onChange={setFromToken}
-            />
-            <TokenSelector
-              label="To Token"
-              value={toToken}
-              onChange={setToToken}
-            />
-
-            {/* Amount Input */}
-            <TextField
-              label="Amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              variant="outlined"
-              fullWidth
-              sx={{
-                backgroundColor: "#f5f5f5",
-                borderRadius: 1,
-                "& .MuiOutlinedInput-root": {
-                  borderRadius: "10px",
-                },
-              }}
-            />
-
-            {/* Swap Button */}
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{
-                backgroundColor: "#ec4612",
-                padding: "12px",
-                borderRadius: 1.5,
-                fontWeight: "bold",
-                "&:hover": {
-                  backgroundColor: "#d93c10",
-                },
-              }}
-              startIcon={<CompareArrowsIcon />}
-              onClick={() => console.log("Run comparison")}
-            >
-              Swap
-            </Button>
+          <TokenSelector
+          label="From Token"
+          value={fromToken}
+          onChange={setFromToken}
+        />
+        <TokenSelector
+          label="To Token"
+          value={toToken}
+          onChange={setToToken}
+        />
+        <TextField
+          label="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          variant="outlined"
+        />
+        <Button
+          variant="contained"
+          onClick={() => console.log(`Swapping ${amount} ${fromToken} to ${toToken}`)}
+        >
+          Swap
+        </Button>
           </Box>
         </Box>
       </Box>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
@@ -20,50 +21,57 @@ const TokenSelector = ({
   onChange: (token: Token | null) => void;
 }) => {
   const [tokens, setTokens] = useState<Token[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-
+  useEffect(() => {
     const fetchTokens = async () => {
-        const res = await fetch("https://api.1inch.dev/swap/v5.2/1/tokens", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer Bj5D2OvWdfBa3o4l28BDdQiwAdcoWbnt`, // Replace with your correct API key
-            "accept": "application/json",
-          },
-        });
-      
-        if (!res.ok) {
-          throw new Error("Failed to fetch tokens");
-        }
-      
-        const data = await res.json();
-        setTokens(data.tokens); // Update with the actual token data structure
-      };
-      
-      
-      
+      setLoading(true);
+      setError(null);
 
+      try {
+        const response = await axios.get("/api/tokens"); // Calls your Next.js API route
+        const tokenMap = response.data;
+
+        const tokenList = Object.values(tokenMap) as Token[];
+
+        setTokens(tokenList);
+      } catch (err: any) {
+        console.error("Error fetching tokens:", err);
+        setError("Failed to load tokens.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTokens();
+  }, []);
 
   return (
-    <Autocomplete
-      options={tokens}
-      getOptionLabel={(option) => `${option.symbol} - ${option.name}`}
-      value={value}
-      onChange={(_, newValue) => onChange(newValue)}
-      renderOption={(props, option) => (
-        <li {...props}>
-          <img
-            src={option.logoURI}
-            alt={option.symbol}
-            width={20}
-            style={{ marginRight: 8 }}
-          />
-          {option.symbol} - {option.name}
-        </li>
-      )}
-      renderInput={(params) => <TextField {...params} label={label} />}
-      isOptionEqualToValue={(option, value) => option.address === value.address}
-    />
+    <div>
+      {loading && <div>Loading tokens...</div>}
+      {error && <div>{error}</div>}
+      <Autocomplete
+        options={tokens}
+        getOptionLabel={(option) => `${option.symbol} - ${option.name}`}
+        value={value}
+        onChange={(_, newValue) => onChange(newValue)}
+        renderOption={(props, option) => (
+          <li {...props}>
+            <img
+              src={option.logoURI}
+              alt={option.symbol}
+              width={20}
+              style={{ marginRight: 8 }}
+            />
+            {option.symbol} - {option.name}
+          </li>
+        )}
+        renderInput={(params) => <TextField {...params} label={label} />}
+        isOptionEqualToValue={(option, value) => option.address === value?.address}
+      />
+    </div>
   );
 };
- 
-export default TokenSelector
+
+export default TokenSelector;
