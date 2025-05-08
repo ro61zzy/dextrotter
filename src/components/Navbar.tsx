@@ -25,20 +25,20 @@ const Navbar = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            p: "10px 1rem",
+            p: {xs:"1px", md:"2px 5px", lg:"10px 1rem"},
           }}
         >
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-evenly",
-              width: "70%",
+              width: "80%",
             }}
           >
             <Typography
               sx={{
                 fontWeight: "700",
-                fontSize: "2rem",
+                fontSize:{ xs: "1.5rem", md: "1.8rem", lg:"2rem" },
                 // pl: "1rem",
                 background: "linear-gradient(45deg, #ec4612, #ff6f00)",
                 WebkitBackgroundClip: "text",

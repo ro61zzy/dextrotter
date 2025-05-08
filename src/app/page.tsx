@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -31,11 +31,26 @@ interface Token {
   logoURI: string;
 }
 
+interface SwapData {
+  aggregator: string;
+  output: string;
+  slippage: string;
+  gas: string;
+  time: string;
+  mev: string;
+}
+
+
+
 export default function Page() {
   const { isConnected, address } = useAccount();
   const [fromToken, setFromToken] = useState<Token | null>(null);
   const [toToken, setToToken] = useState<Token | null>(null);
   const [amount, setAmount] = useState("");
+  const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
+  const [swapData, setSwapData] = useState<SwapData[]>([]);
+
+
 
   const [swapRate, setSwapRate] = useState<number | null>(null);
 
@@ -52,11 +67,82 @@ export default function Page() {
     ],
   };
 
-  const handleSwap = () => {
-    console.log(`Swapping ${amount} ${fromToken} to ${toToken}`);
+  useEffect(() => {
+    const fetchRate = async () => {
+      if (!fromToken || !toToken || !amount) {
+        setConvertedAmount(null);
+        return;
+      }
+  
+      try {
+        const res = await fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${fromToken.address},${toToken.address}&vs_currencies=usd`
+        );
+        const data = await res.json();
+  
+        const fromUSD = data[fromToken.address]?.usd;
+        const toUSD = data[toToken.address]?.usd;
+  
+        if (fromUSD && toUSD) {
+          const rate = fromUSD / toUSD;
+          const outputAmount = (parseFloat(amount) * rate).toFixed(6);
+          setConvertedAmount(outputAmount);
+        } else {
+          setConvertedAmount("0");
+        }
+      } catch (error) {
+        console.error("Failed to fetch rate:", error);
+        setConvertedAmount(null);
+      }
+    };
+  
+    fetchRate();
+  }, [fromToken, toToken, amount]);
+  
 
-    setSwapRate(Math.random() * 10);
+  const handleCheckSwaps = async () => {
+    if (!fromToken || !toToken || !amount) return;
+  
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/simple/price?ids=${fromToken.address},${toToken.address}&vs_currencies=usd`
+    );
+    const data = await res.json();
+  
+    const fromUSD = data[fromToken.address]?.usd;
+    const toUSD = data[toToken.address]?.usd;
+    const rate = fromUSD / toUSD;
+    const estOutput = parseFloat(amount) * rate;
+  
+    // Mock data following the SwapData structure
+    setSwapData([
+      {
+        aggregator: "1inch",
+        output: (estOutput * 0.99).toFixed(4), // simulate slippage
+        slippage: "1%",
+        gas: "$5",
+        time: "12s",
+        mev: "Yes",
+      },
+      {
+        aggregator: "CowSwap",
+        output: (estOutput * 0.985).toFixed(4),
+        slippage: "1.5%",
+        gas: "$4",
+        time: "20s",
+        mev: "Yes",
+      },
+      {
+        aggregator: "Matcha",
+        output: estOutput.toFixed(4),
+        slippage: "0.5%",
+        gas: "$6",
+        time: "10s",
+        mev: "No",
+      },
+    ]);
   };
+  
+  
 
   return (
     <Box
@@ -131,7 +217,7 @@ export default function Page() {
             Token Swap
           </Typography>
 
-          {/* <Box display="flex" flexDirection="column" gap={3}>
+          <Box display="flex" flexDirection="column" gap={3}>
             <TokenSelector
               label="From Token"
               value={fromToken}
@@ -150,13 +236,20 @@ export default function Page() {
             />
             <Button
               variant="contained"
-              onClick={() =>
-                console.log(`Swapping ${amount} ${fromToken} to ${toToken}`)
-              }
+              onClick={handleCheckSwaps}
             >
-              Swap
+             Check Swaps
+
             </Button>
-          </Box> */}
+            {convertedAmount && (
+              <Typography sx={{ color: "#fff", textAlign: "center", mt: 2 }}>
+                You will get approximately{" "}
+                <strong>
+                  {convertedAmount} {toToken?.symbol}
+                </strong>
+              </Typography>
+            )}
+          </Box>
         </Box>
       </Box>
 
@@ -193,32 +286,14 @@ export default function Page() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {["1inch", "CowSwap", "Matcha"].map((dex, index) => (
-              <TableRow
-                key={index}
-                sx={{
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    backgroundColor: "#333",
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                <TableCell
-                  sx={{ display: "flex", alignItems: "center", color: "grey" }}
-                >
-                  {/* <Avatar
-                    sx={{ bgcolor: "#ec4612", mr: 2 }}
-                    alt={dex}
-                    src={`/logos/${dex.toLowerCase()}.png`}
-                  /> */}
-                  {dex}
-                </TableCell>
-                <TableCell sx={{ color: "grey" }}>-</TableCell>
-                <TableCell sx={{ color: "grey" }}>-</TableCell>
-                <TableCell sx={{ color: "grey" }}>-</TableCell>
-                <TableCell sx={{ color: "grey" }}>-</TableCell>
-                <TableCell sx={{ color: "grey" }}>-</TableCell>
+          {swapData.map((data, index) => (
+              <TableRow key={index}>
+                <TableCell>{data.aggregator}</TableCell>
+                <TableCell>{data.output}</TableCell>
+                <TableCell>{data.slippage}</TableCell>
+                <TableCell>{data.gas}</TableCell>
+                <TableCell>{data.time}</TableCell>
+                <TableCell>{data.mev}</TableCell>
               </TableRow>
             ))}
           </TableBody>
